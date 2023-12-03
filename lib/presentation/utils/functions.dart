@@ -19,6 +19,20 @@ dynamic valueOfTheIndicator(List<TaskModel> task) {
   }
 }
 
+bool isPending(DateTime createdAtDate, DateTime createdAtTime) {
+  if (DateTime.now().isAfter(createdAtDate)) {
+    return true;
+  } else if (DateTime.now().day == createdAtDate.day &&
+      DateTime.now().month == createdAtDate.month &&
+      DateTime.now().year == createdAtDate.year &&
+      DateTime.now().isAfter(createdAtTime)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+
 bool tasksExists(TaskModel? taskModel) {
   if (taskModel != null) {
     return true;

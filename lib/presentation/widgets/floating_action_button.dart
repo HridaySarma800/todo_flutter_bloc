@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo/presentation/resources/color_manager.dart';
 import 'package:todo/presentation/resources/routes_manager.dart';
 
 import '../resources/values_manager.dart';
@@ -10,7 +11,7 @@ class CustomFAB extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushReplacementNamed(Routes.addTask);
+        Navigator.of(context).pushNamed(Routes.addTask);
       },
       child: Material(
         borderRadius: BorderRadius.circular(15),
@@ -19,7 +20,7 @@ class CustomFAB extends StatelessWidget {
           width: AppSize.large,
           height: AppSize.large,
           decoration: BoxDecoration(
-            color: const Color(0xff4568dc),
+            color: ColorManager.primary,
             borderRadius: BorderRadius.circular(AppSize.small),
           ),
           child: const Center(

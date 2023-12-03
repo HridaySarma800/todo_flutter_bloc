@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import 'font_manager.dart';
@@ -22,17 +21,17 @@ TextStyle? headline2({double fontSize = FontSize.f24, required Color color}) {
       fontSize, FontConstants.fontFamily, FontWeightManager.bold, color);
 }
 
-TextStyle? headline3({double fontSize = FontSize.f18, required Color color}) {
+TextStyle? headline3({double fontSize = FontSize.f22, required Color color}) {
   return _getTextStyle(
       fontSize, FontConstants.fontFamily, FontWeightManager.medium, color);
 }
 
-TextStyle? subHeading({double fontSize = FontSize.f16, required Color color}) {
+TextStyle? subHeading({double fontSize = FontSize.f18, required Color color}) {
   return _getTextStyle(
       fontSize, FontConstants.fontFamily, FontWeightManager.regular, color);
 }
 
-TextStyle? body({double fontSize = FontSize.f14, required Color color}) {
+TextStyle? body({double fontSize = FontSize.f16, required Color color}) {
   return _getTextStyle(
       fontSize, FontConstants.fontFamily, FontWeightManager.regular, color);
 }

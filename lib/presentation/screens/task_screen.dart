@@ -187,7 +187,7 @@ class _TaskScreenState extends State<TaskScreen> {
                                         child: Text(
                                           BlocProvider.of<TimeCubit>(context)
                                               .showTime(state.time),
-                                          style: caption(color: Colors.black),
+                                          style: subHeading(color: Colors.black),
                                         ),
                                       ),
                                     )
@@ -228,7 +228,7 @@ class _TaskScreenState extends State<TaskScreen> {
                                     Padding(
                                       padding: const EdgeInsets.only(left: 10),
                                       child: Text(StringsManager.dateString,
-                                          style: caption(color: Colors.black)),
+                                          style: subHeading(color: Colors.black)),
                                     ),
                                     Expanded(child: Container()),
                                     Container(
@@ -307,11 +307,12 @@ class _TaskScreenState extends State<TaskScreen> {
                               ),
                             )
                           : Container(),
+                      const SizedBox(height: AppSize.xl,),
                       MaterialButton(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15),
                         ),
-                        minWidth: 150,
+                        minWidth: AppSize.xll,
                         height: 55,
                         onPressed: () {
                           if (widget.task == null) {
@@ -327,9 +328,7 @@ class _TaskScreenState extends State<TaskScreen> {
                           tasksExists(widget.task)
                               ? StringsManager.updateTaskText
                               : StringsManager.addTaskButtonText,
-                          style: const TextStyle(
-                            color: Colors.white,
-                          ),
+                          style: subHeading(color: Colors.white)
                         ),
                       ),
                     ],

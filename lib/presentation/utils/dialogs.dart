@@ -2,7 +2,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
 import 'package:todo/presentation/resources/strings_manager.dart';
-import 'package:todo/presentation/widgets/base_widget.dart';
 
 /// No task Warning Dialog
 dynamic warningNoTask(BuildContext context) {
@@ -32,7 +31,7 @@ dynamic deleteAllTask(BuildContext context) {
       Navigator.pop(context);
     },
     onTapConfirm: () {
-      BaseWidget.of(context).dataStore.box.clear();
+      // BaseWidget.of(context).dataStore.box.clear();
       Navigator.pop(context);
     },
     panaraDialogType: PanaraDialogType.error,

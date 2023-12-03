@@ -13,6 +13,7 @@ class AppMargin {
 }
 
 class AppSize {
+  static const double xxs = 4;
   static const double xs = 8;
   static const double small = 16;
   static const double semiMedium = 24;
@@ -20,6 +21,7 @@ class AppSize {
   static const double semiLarge = 48;
   static const double large = 64;
   static const double xl = 132;
+  static const double xll = 196;
   static const double xxl = 264;
   static const double xxxl = 528;
 }

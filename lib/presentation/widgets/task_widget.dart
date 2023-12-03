@@ -4,6 +4,9 @@ import 'package:intl/intl.dart';
 import 'package:todo/data/models/task_model.dart';
 import 'package:todo/logic/home_cubit/home_cubit.dart';
 import 'package:todo/presentation/resources/color_manager.dart';
+import 'package:todo/presentation/resources/styles_manager.dart';
+import 'package:todo/presentation/resources/values_manager.dart';
+import 'package:todo/presentation/utils/functions.dart';
 import '../resources/routes_manager.dart';
 
 class TaskWidget extends StatefulWidget {
@@ -47,9 +50,13 @@ class _TaskWidgetState extends State<TaskWidget> {
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
             color: widget.task.isCompleted
-                ? const Color.fromARGB(154, 119, 144, 229)
-                : Colors.white,
+                ? Colors.green
+                : isPending(
+                        widget.task.createdAtDate, widget.task.createdAtTime)
+                    ? Colors.yellow
+                    : Colors.white,
             borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: Colors.black),
             boxShadow: [
               BoxShadow(
                   color: Colors.black.withOpacity(.1),
@@ -64,16 +71,27 @@ class _TaskWidgetState extends State<TaskWidget> {
                 BlocProvider.of<HomeCubit>(context).loadAllTasks();
               },
               child: AnimatedContainer(
-                duration: const Duration(milliseconds: 600),
+                duration: const Duration(seconds: 2),
                 decoration: BoxDecoration(
                     color: widget.task.isCompleted
                         ? ColorManager.primary
                         : Colors.white,
                     shape: BoxShape.circle,
-                    border: Border.all(color: Colors.grey, width: .8)),
-                child: const Icon(
-                  Icons.check,
-                  color: Colors.white,
+                    border: Border.all(color: Colors.black, width: .8)),
+                child:  Padding(
+                  padding: const EdgeInsets.all(AppSize.xxs),
+                  child: isPending(
+                          widget.task.createdAtDate, widget.task.createdAtTime) && !widget.task.isCompleted
+                      ? const Icon(
+                          Icons.pending_actions_sharp,
+                          color: Colors.black87,
+                          size: AppSize.semiMedium,
+                        )
+                      : const Icon(
+                          Icons.check,
+                          color: Colors.white,
+                          size: AppSize.semiMedium,
+                        ),
                 ),
               ),
             ),
@@ -83,11 +101,11 @@ class _TaskWidgetState extends State<TaskWidget> {
               padding: const EdgeInsets.only(bottom: 5, top: 3),
               child: Text(
                 taskControllerForTitle.text,
-                style: TextStyle(
-                    color: widget.task.isCompleted
-                        ? ColorManager.primary
-                        : Colors.black,
-                    fontWeight: FontWeight.w500,
+                style: subHeading(
+                  color: widget.task.isCompleted
+                      ? ColorManager.primary
+                      : Colors.black,
+                )?.copyWith(
                     decoration: widget.task.isCompleted
                         ? TextDecoration.lineThrough
                         : null),
@@ -100,15 +118,14 @@ class _TaskWidgetState extends State<TaskWidget> {
               children: [
                 Text(
                   taskControllerForSubtitle.text,
-                  style: TextStyle(
+                  style: body(
                     color: widget.task.isCompleted
                         ? ColorManager.primary
-                        : const Color.fromARGB(255, 164, 164, 164),
-                    fontWeight: FontWeight.w300,
-                    decoration: widget.task.isCompleted
-                        ? TextDecoration.lineThrough
-                        : null,
-                  ),
+                        : Colors.black54,
+                  )?.copyWith(
+                      decoration: widget.task.isCompleted
+                          ? TextDecoration.lineThrough
+                          : null),
                 ),
 
                 /// Date & Time of Task
@@ -123,21 +140,18 @@ class _TaskWidgetState extends State<TaskWidget> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          DateFormat('hh:mm a')
-                              .format(widget.task.createdAtTime),
-                          style: TextStyle(
-                              fontSize: 14,
-                              color: widget.task.isCompleted
-                                  ? Colors.white
-                                  : Colors.grey),
-                        ),
+                            DateFormat('hh:mm a')
+                                .format(widget.task.createdAtTime),
+                            style: body(
+                                color: widget.task.isCompleted
+                                    ? Colors.white
+                                    : Colors.black45)),
                         Text(
                           DateFormat.yMMMEd().format(widget.task.createdAtDate),
-                          style: TextStyle(
-                              fontSize: 12,
+                          style: caption(
                               color: widget.task.isCompleted
                                   ? Colors.white
-                                  : Colors.grey),
+                                  : Colors.black87),
                         ),
                       ],
                     ),
@@ -148,4 +162,5 @@ class _TaskWidgetState extends State<TaskWidget> {
       ),
     );
   }
+
 }

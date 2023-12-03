@@ -39,8 +39,8 @@ class TaskAppbar extends StatelessWidget implements PreferredSizeWidget {
                 RichText(
                   text: TextSpan(
                       text: tasksExists(taskModel)
-                          ? StringsManager.addTaskText
-                          : StringsManager.updateTaskText,
+                          ? StringsManager.updateTaskText
+                          : StringsManager.addTaskText,
                       style: headline2(color: Colors.white),
                       children: [
                         TextSpan(
