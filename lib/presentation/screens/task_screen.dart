@@ -13,12 +13,14 @@ import 'package:todo/presentation/widgets/task_app_bar.dart';
 
 import '../../logic/time/time_cubit.dart';
 
+/// The screen for creating or editing a task.
 class TaskScreen extends StatefulWidget {
   const TaskScreen({
     super.key,
     required this.task,
   });
 
+  /// The task to be edited. Null if creating a new task.
   final TaskModel? task;
 
   @override
@@ -36,6 +38,7 @@ class _TaskScreenState extends State<TaskScreen> {
 
   @override
   void initState() {
+    // Initialize state with task details if editing an existing task
     if (widget.task != null) {
       title = widget.task!.title;
       subtitle = widget.task!.subtitle;
@@ -68,6 +71,7 @@ class _TaskScreenState extends State<TaskScreen> {
                 const SizedBox(
                   height: AppSize.small,
                 ),
+                // Title Text Field
                 Padding(
                   padding: const EdgeInsets.only(left: AppSize.small),
                   child: Text(StringsManager.titleOfTitleTextField,
@@ -76,13 +80,11 @@ class _TaskScreenState extends State<TaskScreen> {
                 const SizedBox(
                   height: AppSize.small,
                 ),
+                // Title Input Field
                 Container(
-                  width: MediaQuery
-                      .of(context)
-                      .size
-                      .width,
+                  width: MediaQuery.of(context).size.width,
                   margin:
-                  const EdgeInsets.symmetric(horizontal: AppMargin.medium),
+                      const EdgeInsets.symmetric(horizontal: AppMargin.medium),
                   child: TextFormField(
                     cursorHeight: AppSize.medium,
                     controller: titleController,
@@ -116,18 +118,16 @@ class _TaskScreenState extends State<TaskScreen> {
                 const SizedBox(
                   height: AppSize.medium,
                 ),
+                // Subtitle Input Field
                 Container(
-                  width: MediaQuery
-                      .of(context)
-                      .size
-                      .width,
+                  width: MediaQuery.of(context).size.width,
                   margin: const EdgeInsets.symmetric(horizontal: 16),
                   child: TextFormField(
                     controller: subTitleController,
                     style: const TextStyle(color: Colors.black),
                     decoration: InputDecoration(
                       prefixIcon:
-                      const Icon(Icons.bookmark_border, color: Colors.grey),
+                          const Icon(Icons.bookmark_border, color: Colors.grey),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(
                           AppSize.small,
@@ -150,6 +150,7 @@ class _TaskScreenState extends State<TaskScreen> {
                     },
                   ),
                 ),
+                // Date and Time Pickers
                 BlocBuilder<TimeCubit, TimeState>(
                   builder: (context, state) {
                     if (state is TimeInitial) {
@@ -165,19 +166,18 @@ class _TaskScreenState extends State<TaskScreen> {
                                     showSecondsColumn: false,
                                     onChanged: (_) {},
                                     onConfirm: (selectedTime) {
-                                      time = selectedTime;
-                                      BlocProvider.of<TimeCubit>(context)
-                                          .update(selectedTime, state.date);
-                                      FocusManager.instance.primaryFocus
-                                          ?.unfocus();
-                                    },
+                                  time = selectedTime;
+                                  BlocProvider.of<TimeCubit>(context)
+                                      .update(selectedTime, state.date);
+                                  FocusManager.instance.primaryFocus?.unfocus();
+                                },
                                     currentTime:
-                                    BlocProvider.of<TimeCubit>(context)
-                                        .showTimeAsDateTime(time));
+                                        BlocProvider.of<TimeCubit>(context)
+                                            .showTimeAsDateTime(time));
                               },
                               child: Container(
                                 margin:
-                                const EdgeInsets.fromLTRB(20, 20, 20, 10),
+                                    const EdgeInsets.fromLTRB(20, 20, 20, 10),
                                 width: double.infinity,
                                 height: 55,
                                 decoration: BoxDecoration(
@@ -192,7 +192,7 @@ class _TaskScreenState extends State<TaskScreen> {
                                       padding: const EdgeInsets.only(left: 10),
                                       child: Text(StringsManager.timeString,
                                           style:
-                                          subHeading(color: Colors.black)),
+                                              subHeading(color: Colors.black)),
                                     ),
                                     Expanded(child: Container()),
                                     Container(
@@ -201,14 +201,14 @@ class _TaskScreenState extends State<TaskScreen> {
                                       height: 35,
                                       decoration: BoxDecoration(
                                           borderRadius:
-                                          BorderRadius.circular(10),
+                                              BorderRadius.circular(10),
                                           color: Colors.grey.shade100),
                                       child: Center(
                                         child: Text(
                                           BlocProvider.of<TimeCubit>(context)
                                               .showTime(state.time),
                                           style:
-                                          subHeading(color: Colors.black),
+                                              subHeading(color: Colors.black),
                                         ),
                                       ),
                                     )
@@ -224,19 +224,18 @@ class _TaskScreenState extends State<TaskScreen> {
                                     maxTime: DateTime(2030, 3, 5),
                                     onChanged: (_) {},
                                     onConfirm: (selectedDate) {
-                                      date = selectedDate;
-                                      BlocProvider.of<TimeCubit>(context)
-                                          .update(state.time, selectedDate);
-                                      FocusManager.instance.primaryFocus
-                                          ?.unfocus();
-                                    },
+                                  date = selectedDate;
+                                  BlocProvider.of<TimeCubit>(context)
+                                      .update(state.time, selectedDate);
+                                  FocusManager.instance.primaryFocus?.unfocus();
+                                },
                                     currentTime:
-                                    BlocProvider.of<TimeCubit>(context)
-                                        .showDateAsDateTime(date));
+                                        BlocProvider.of<TimeCubit>(context)
+                                            .showDateAsDateTime(date));
                               },
                               child: Container(
                                 margin:
-                                const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                                    const EdgeInsets.fromLTRB(20, 10, 20, 10),
                                 width: double.infinity,
                                 height: 55,
                                 decoration: BoxDecoration(
@@ -251,7 +250,7 @@ class _TaskScreenState extends State<TaskScreen> {
                                       padding: const EdgeInsets.only(left: 10),
                                       child: Text(StringsManager.dateString,
                                           style:
-                                          subHeading(color: Colors.black)),
+                                              subHeading(color: Colors.black)),
                                     ),
                                     Expanded(child: Container()),
                                     Container(
@@ -260,14 +259,14 @@ class _TaskScreenState extends State<TaskScreen> {
                                       height: 35,
                                       decoration: BoxDecoration(
                                           borderRadius:
-                                          BorderRadius.circular(10),
+                                              BorderRadius.circular(10),
                                           color: Colors.grey.shade100),
                                       child: Center(
                                         child: Text(
                                           BlocProvider.of<TimeCubit>(context)
                                               .showDate(date),
                                           style:
-                                          subHeading(color: Colors.black),
+                                              subHeading(color: Colors.black),
                                         ),
                                       ),
                                     )
@@ -290,49 +289,50 @@ class _TaskScreenState extends State<TaskScreen> {
                         ? MainAxisAlignment.spaceEvenly
                         : MainAxisAlignment.center,
                     children: [
+                      // Delete Button (visible only when editing an existing task).
                       tasksExists(widget.task)
                           ? Container(
-                        width: 150,
-                        height: 55,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                                color: ColorManager.primary, width: 2),
-                            borderRadius: BorderRadius.circular(15)),
-                        child: MaterialButton(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          minWidth: 150,
-                          height: 55,
-                          onPressed: () {
-                            BlocProvider.of<TaskCubit>(context)
-                                .deleteTask(widget.task);
-                            BlocProvider.of<HomeCubit>(context)
-                                .loadAllTasks();
-                            showToast(context, StringsManager.success,
-                                StringsManager.deletedMessage);
-                            Navigator.pop(context);
-                          },
-                          color: Colors.white,
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.close,
-                                color: ColorManager.primary,
-                              ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                StringsManager.deleteTaskText,
-                                style: TextStyle(
-                                  color: ColorManager.primary,
+                              width: 150,
+                              height: 55,
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: ColorManager.primary, width: 2),
+                                  borderRadius: BorderRadius.circular(15)),
+                              child: MaterialButton(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                minWidth: 150,
+                                height: 55,
+                                onPressed: () {
+                                  BlocProvider.of<TaskCubit>(context)
+                                      .deleteTask(widget.task);
+                                  BlocProvider.of<HomeCubit>(context)
+                                      .loadAllTasks();
+                                  showToast(context, StringsManager.success,
+                                      StringsManager.deletedMessage);
+                                  Navigator.pop(context);
+                                },
+                                color: Colors.white,
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.close,
+                                      color: ColorManager.primary,
+                                    ),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      StringsManager.deleteTaskText,
+                                      style: TextStyle(
+                                        color: ColorManager.primary,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                      )
+                            )
                           : Container(),
                       const SizedBox(
                         height: AppSize.xl,
@@ -344,6 +344,7 @@ class _TaskScreenState extends State<TaskScreen> {
                         minWidth: AppSize.xll,
                         height: 55,
                         onPressed: () {
+                          // Check if creating a new task or updating an existing one
                           if (widget.task == null) {
                             BlocProvider.of<TaskCubit>(context)
                                 .add(title, subtitle, time, date, context);

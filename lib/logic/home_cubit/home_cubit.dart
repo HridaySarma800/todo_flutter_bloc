@@ -12,6 +12,11 @@ import 'package:todo/presentation/utils/globals.dart';
 
 part 'home_state.dart';
 
+/// Cubit responsible for managing the state of the home screen.
+/// The `HomeCubit` extends the `Cubit` class and provides methods for loading
+/// tasks, filtering tasks based on completion status, canceling task deletion,
+/// and handling task deletion with an undo option.
+
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial(random: Random().nextInt(999999))) {
     dataRepoImpl = DataRepoImpl();
@@ -25,6 +30,7 @@ class HomeCubit extends Cubit<HomeState> {
   late TaskModel? taskModel;
   int deleteCount = 0;
 
+  /// Loads all tasks and emits the appropriate state.
   void loadAllTasks() async {
     try {
       List<TaskModel> tasks = await dataRepoImpl.listAllTasks();
@@ -38,6 +44,7 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
+  /// Filters tasks based on the selected position.
   void filter(int pos) async {
     if (pos == 0) {
       loadAllTasks();
@@ -59,7 +66,8 @@ class HomeCubit extends Cubit<HomeState> {
       List<TaskModel> tasks = await dataRepoImpl.listAllTasks();
       List<TaskModel> filteredList = [];
       for (int i = 0; i < tasks.length; i++) {
-        if (!tasks[i].isCompleted && isPending(tasks[i].createdAtDate, tasks[i].createdAtTime)) {
+        if (!tasks[i].isCompleted &&
+            isPending(tasks[i].createdAtDate, tasks[i].createdAtTime)) {
           filteredList.add(tasks[i]);
         }
       }
@@ -72,11 +80,13 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
+  /// Cancels the task deletion and reloads all tasks.
   void cancelDelete() {
     deleteTask = false;
     loadAllTasks();
   }
 
+  /// Deletes a task and handles undo functionality.
   void delete(TaskModel task, BuildContext context) {
     if (deleteTask) {
       BlocProvider.of<TaskCubit>(context).deleteTask(task);
@@ -90,6 +100,7 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
+  /// Updates the delete count for tracking multiple deletions.
   void updateDeleteCount() {
     deleteCount++;
   }

@@ -21,15 +21,20 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: const CustomFAB(),
       body: SafeArea(
         child: BlocConsumer<HomeCubit, HomeState>(
-          listener: (context, state) {},
+          // Listener to handle changes in the HomeCubit state
+        listener: (context, state) {},
           builder: (context, state) {
+            // When the state is HomeInitial, return an empty SizedBox
             if (state is HomeInitial) {
               return const SizedBox();
             } else if (state is HomeTasksLoaded) {
+              // When the state is HomeTasksLoaded, return the LoadedBody with tasks
               return LoadedBody(tasks: state.tasks);
             } else if (state is HomeTaskEmpty) {
+              // When the state is HomeTaskEmpty, return the EmptyBody
               return const EmptyBody();
             } else if (state is HomeTaskLoadFailed) {
+              // When the state is HomeTaskLoadFailed, return the ErrorBody with a message
               return ErrorBody(message: state.text);
             } else {
               return const UnknownBody();

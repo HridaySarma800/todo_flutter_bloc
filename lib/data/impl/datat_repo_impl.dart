@@ -4,6 +4,9 @@ import 'package:todo/data/models/task_model.dart';
 import 'package:todo/data/repository/data_repository.dart';
 import 'package:todo/presentation/resources/strings_manager.dart';
 
+/// An implementation of the DataRepository interface using Hive as the data storage.
+/// This class provides methods to add, get, update, delete tasks, and list all tasks
+/// stored in the Hive box.
 class DataRepoImpl implements DataRepository {
   final Box<TaskModel> box = Hive.box<TaskModel>(StringsManager.boxName);
 

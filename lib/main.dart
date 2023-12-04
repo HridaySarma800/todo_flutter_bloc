@@ -10,10 +10,15 @@ import 'package:todo/logic/time/time_cubit.dart';
 import 'package:todo/presentation/resources/strings_manager.dart';
 
 Future<void> main() async {
+  // Initialize Hive for Flutter, enabling the usage of Hive database.
   await Hive.initFlutter();
+  // Register a custom adapter for the TaskModel class to facilitate
+  // the serialization and deserialization of TaskModel instances.
   Hive.registerAdapter<TaskModel>(TaskModelAdapter());
-  var box = await Hive.openBox<TaskModel>(StringsManager.boxName);
 
+  // Configure the application's state management using the MultiBlocProvider widget,
+  // providing instances of HomeCubit, TimeCubit, TaskCubit, and DropdownCubit to manage
+  // the state for different parts of the application.
   runApp(MultiBlocProvider(
     providers: [
       BlocProvider(

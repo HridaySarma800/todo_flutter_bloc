@@ -4,6 +4,8 @@ import 'package:todo/presentation/resources/routes_manager.dart';
 
 import '../resources/values_manager.dart';
 
+
+// A floating action button to add tasks.
 class CustomFAB extends StatelessWidget {
   const CustomFAB({super.key});
 

@@ -1,3 +1,4 @@
+// The strings used throughout the application.
 class StringsManager {
   static const String noRouteFound = "Not Found";
   static const String mainTitle = "My Tasks";

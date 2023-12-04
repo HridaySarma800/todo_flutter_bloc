@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'font_manager.dart';
 
+/// A private function that generates a [TextStyle] based on provided parameters.
 TextStyle? _getTextStyle(
     double fontSize, String fontFamily, FontWeight fontWeight, Color color) {
   return TextStyle(

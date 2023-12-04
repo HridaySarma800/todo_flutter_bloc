@@ -24,6 +24,7 @@ class LoadedBody extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
+          // Progress Indicator and Title
           Container(
             margin: const EdgeInsets.symmetric(
                 vertical: AppSize.medium, horizontal: AppSize.small),
@@ -33,6 +34,7 @@ class LoadedBody extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+                // Circular Progress Indicator
                 SizedBox(
                   width: 25,
                   height: 25,
@@ -42,20 +44,24 @@ class LoadedBody extends StatelessWidget {
                     value: checkDoneTask(tasks) / valueOfTheIndicator(tasks),
                   ),
                 ),
+                // Title Section
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // Main Title
                     Text(StringsManager.mainTitle,
                         style: headline3(color: Colors.black)),
                     const SizedBox(
                       height: 3,
                     ),
+                    // Task Completion Status
                     Text(
                         "${checkDoneTask(tasks)} of ${tasks.length} task${tasks.length > 1 ? 's' : ''} completed !",
                         style: subHeading(color: Colors.black)),
                   ],
                 ),
+                // Dropdown for Task Filtering
                 SizedBox(
                   width: AppSize.large,
                   height: AppSize.large,
@@ -77,6 +83,7 @@ class LoadedBody extends StatelessWidget {
                                 ),
                               ),
                             ),
+                            // Dropdown items based on the loaded items from the state
                             items: [
                               ...state.items.map(
                                 (item) => DropdownMenuItem<MenuItem>(
@@ -92,6 +99,7 @@ class LoadedBody extends StatelessWidget {
                                         const SizedBox(
                                           width: 10,
                                         ),
+                                        // Text representing the filter item
                                         Expanded(
                                           child: Text(item.text,
                                               style: body(
@@ -106,12 +114,14 @@ class LoadedBody extends StatelessWidget {
                                     )),
                               ),
                             ],
+                            // Callback when a dropdown item is selected
                             onChanged: (value) {
                               BlocProvider.of<DropdownCubit>(context).toggle(
                                   state.items.indexOf(value!), state.items);
                               BlocProvider.of<HomeCubit>(context)
                                   .filter(state.items.indexOf(value));
                             },
+                            // Styling for the dropdown and menu items
                             dropdownStyleData: DropdownStyleData(
                               width: AppSize.xl,
                               decoration: BoxDecoration(
@@ -127,6 +137,7 @@ class LoadedBody extends StatelessWidget {
                           ),
                         );
                       } else {
+                        // Return an empty SizedBox if the dropdown state is not recognized
                         return const SizedBox();
                       }
                     },
@@ -136,7 +147,7 @@ class LoadedBody extends StatelessWidget {
             ),
           ),
 
-          /// Divider
+          // Divider
           const Padding(
             padding: EdgeInsets.only(top: 10),
             child: Divider(
@@ -144,6 +155,7 @@ class LoadedBody extends StatelessWidget {
               indent: 100,
             ),
           ),
+          // Task List
           SizedBox(
             width: double.infinity,
             height: 585,
@@ -153,6 +165,7 @@ class LoadedBody extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 var task = tasks[index];
                 bool first = true;
+                // Dismissible Task Widget
                 return Dismissible(
                   direction: DismissDirection.horizontal,
                   resizeDuration: const Duration(seconds: 2),

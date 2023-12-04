@@ -20,6 +20,7 @@ class EmptyBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        // Loading Indicator and Title
         Container(
           margin: const EdgeInsets.symmetric(
               vertical: AppSize.medium, horizontal: AppSize.small),
@@ -28,6 +29,7 @@ class EmptyBody extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              // Loading Indicator
               SizedBox(
                 width: AppSize.medium,
                 height: AppSize.medium,
@@ -37,26 +39,33 @@ class EmptyBody extends StatelessWidget {
                   value: 1,
                 ),
               ),
+              // Title Section
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Main Title
                   Text(StringsManager.mainTitle,
                       style: headline3(color: Colors.black)),
                   const SizedBox(
                     height: 3,
                   ),
+                  // Task Completion Status
                   Text("0 of 0 task completed !",
                       style: subHeading(color: Colors.black)),
                 ],
               ),
+              // Dropdown for Task Filtering
               BlocBuilder<DropdownCubit, DropdownState>(
                 builder: (context, state) {
                   if (state is DropdownInitial) {
+                    // Display a loading indicator for dropdown initialization.
                     return const CircularProgressIndicator();
                   } else if (state is DropdownItemsLoaded) {
+                    // Display the actual dropdown when items are loaded.
                     return DropdownButtonHideUnderline(
                       child: DropdownButton2(
+                        // Custom button with filter icon
                         customButton: const SizedBox(
                           height: AppSize.semiLarge,
                           width: AppSize.semiLarge,
@@ -68,12 +77,14 @@ class EmptyBody extends StatelessWidget {
                             ),
                           ),
                         ),
+                        // Dropdown items based on the loaded items from the state
                         items: [
                           ...state.items.map(
                             (item) => DropdownMenuItem<MenuItem>(
                                 value: item,
                                 child: Row(
                                   children: [
+                                    // Icon representing the filter item
                                     Icon(item.icon,
                                         color:
                                             item == state.items[state.selected]
@@ -83,6 +94,7 @@ class EmptyBody extends StatelessWidget {
                                     const SizedBox(
                                       width: 10,
                                     ),
+                                    // Text representing the filter item
                                     Expanded(
                                       child: Text(item.text,
                                           style: body(
@@ -96,12 +108,15 @@ class EmptyBody extends StatelessWidget {
                                 )),
                           ),
                         ],
+                        // Callback when a dropdown item is selected
                         onChanged: (value) {
+                          // Toggle dropdown selection and apply filter
                           BlocProvider.of<DropdownCubit>(context)
                               .toggle(state.items.indexOf(value!), state.items);
                           BlocProvider.of<HomeCubit>(context)
                               .filter(state.items.indexOf(value));
                         },
+                        // Styling for the dropdown and menu items
                         dropdownStyleData: DropdownStyleData(
                           width: AppSize.xl,
                           decoration: BoxDecoration(
@@ -117,6 +132,7 @@ class EmptyBody extends StatelessWidget {
                       ),
                     );
                   } else {
+                    // Return an empty SizedBox if the dropdown state is not recognized.
                     return const SizedBox();
                   }
                 },
@@ -124,6 +140,7 @@ class EmptyBody extends StatelessWidget {
             ],
           ),
         ),
+        // Divider
         const Padding(
           padding: EdgeInsets.only(top: 10),
           child: Divider(
@@ -131,10 +148,11 @@ class EmptyBody extends StatelessWidget {
             indent: AppSize.large,
           ),
         ),
+        // Lottie Animation and Bottom Text
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            /// Lottie
+            // Lottie Animation
             FadeIn(
               child: SizedBox(
                 width: 200,
@@ -146,7 +164,7 @@ class EmptyBody extends StatelessWidget {
               ),
             ),
 
-            /// Bottom Texts
+            // Bottom Text
             FadeInUp(
               from: 30,
               child: const Text(StringsManager.allTasksCompletedText),
