@@ -23,7 +23,7 @@ class TaskCubit extends Cubit<TaskState> {
   /// After adding the task, it reloads all tasks on the home screen.
   /// If title or subtitle is null, it shows a warning.
   dynamic add(String? title, String? subtitle, DateTime? time, DateTime? date,
-      BuildContext context) {
+      BuildContext? context) {
     if (title != null && subtitle != null) {
       var task = TaskModel.create(
         title: title,
@@ -32,8 +32,10 @@ class TaskCubit extends Cubit<TaskState> {
         subtitle: subtitle,
       );
       dataRepoImpl.addTask(task: task);
-      BlocProvider.of<HomeCubit>(context).loadAllTasks();
-      Navigator.of(context).pop();
+      if (context != null) {
+        BlocProvider.of<HomeCubit>(context).loadAllTasks();
+        Navigator.of(context).pop();
+      }
     } else {
       emptyFieldsWarning(context);
     }
@@ -43,15 +45,17 @@ class TaskCubit extends Cubit<TaskState> {
   /// After updating the task, it reloads all tasks on the home screen.
   /// If title or subtitle is null, it shows a warning.
   update(String? title, String? subtitle, TaskModel? task, DateTime? time,
-      DateTime? date, BuildContext context) {
+      DateTime? date, BuildContext? context) {
     if (title != null && subtitle != null) {
       task!.title = title;
       task.subtitle = subtitle;
       task.createdAtDate = date ?? DateTime.now();
       task.createdAtTime = time ?? DateTime.now();
       dataRepoImpl.updateTask(task: task);
-      BlocProvider.of<HomeCubit>(context).loadAllTasks();
-      Navigator.of(context).pop();
+      if (context != null) {
+        BlocProvider.of<HomeCubit>(context).loadAllTasks();
+        Navigator.of(context).pop();
+      }
     } else {
       emptyFieldsWarning(context);
     }

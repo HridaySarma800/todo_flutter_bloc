@@ -31,7 +31,7 @@ class HomeCubit extends Cubit<HomeState> {
   int deleteCount = 0;
 
   /// Loads all tasks and emits the appropriate state.
-  void loadAllTasks() async {
+  Future loadAllTasks() async {
     try {
       List<TaskModel> tasks = await dataRepoImpl.listAllTasks();
       if (tasks.isNotEmpty) {

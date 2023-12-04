@@ -1,10 +1,37 @@
-~~# todo
+
 # TaskMaster - A simple todo application
 
 A simple todo app built with Flutter using the Bloc state management pattern. The app allows users to create, update, delete, and filter tasks. It utilizes various Flutter packages and follows best practices in app architecture.
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![](https://github.com/HridaySarma800/todo_flutter_bloc/blob/master/screenshots/Screenshot%202023-12-04%20at%2015.25.13.png?raw=true)
+
+
+![](https://github.com/HridaySarma800/todo_flutter_bloc/blob/master/screenshots/Simulator%20Screenshot%20-%20Main%20-%202023-12-04%20at%2015.02.47.png?raw=true)
+
+
+![](https://github.com/HridaySarma800/todo_flutter_bloc/blob/master/screenshots/Simulator%20Screenshot%20-%20Main%20-%202023-12-04%20at%2015.02.52.png?raw=true)
+
+
+![](https://github.com/HridaySarma800/todo_flutter_bloc/blob/master/screenshots/Simulator%20Screenshot%20-%20Main%20-%202023-12-04%20at%2015.03.21.png?raw=true)
+
+
+![](https://github.com/HridaySarma800/todo_flutter_bloc/blob/master/screenshots/Simulator%20Screenshot%20-%20Main%20-%202023-12-04%20at%2015.24.12.png?raw=true)
+
+
+![](https://github.com/HridaySarma800/todo_flutter_bloc/blob/master/screenshots/Simulator%20Screenshot%20-%20Main%20-%202023-12-04%20at%2015.26.19.png?raw=true)
+
+
+![](https://github.com/HridaySarma800/todo_flutter_bloc/blob/master/screenshots/Simulator%20Screenshot%20-%20Main%20-%202023-12-04%20at%2015.26.24.png?raw=true)
+
+
+![](https://github.com/HridaySarma800/todo_flutter_bloc/blob/master/screenshots/Simulator%20Screenshot%20-%20Main%20-%202023-12-04%20at%2015.26.28.png?raw=true)
+
+
+![](https://github.com/HridaySarma800/todo_flutter_bloc/blob/master/screenshots/datepicker.png?raw=true)
+
+
+![](https://github.com/HridaySarma800/todo_flutter_bloc/blob/master/screenshots/time%20picker.png?raw=true)
 
 
 ## Features
@@ -41,23 +68,19 @@ A simple todo app built with Flutter using the Bloc state management pattern. Th
   flutter run
 ```
 
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
-
-
-![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
-
-
-## 🚀 About Me
-I'm a full stack developer...
-
-
 ## Running Tests
 
 To run tests, run the following command
 
 ```bash
-  npm run test
+  flutter test
 ```
+
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+
+![Logo](https://github.com/HridaySarma800/todo_flutter_bloc/blob/master/assets/images/logo.png?raw=true)
 
