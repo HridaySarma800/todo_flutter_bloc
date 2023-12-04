@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/data/impl/datat_repo_impl.dart';
 import 'package:todo/data/models/task_model.dart';
 import 'package:todo/logic/task/task_cubit.dart';
-import 'package:todo/presentation/utils/functions.dart';
+import 'package:todo/presentation/utils/globals.dart';
 
 part 'home_state.dart';
 

@@ -8,7 +8,7 @@ import 'package:todo/logic/home_cubit/home_cubit.dart';
 import 'package:todo/presentation/models/menu_item.dart';
 import 'package:todo/presentation/resources/strings_manager.dart';
 import 'package:todo/presentation/resources/styles_manager.dart';
-import 'package:todo/presentation/utils/functions.dart';
+import 'package:todo/presentation/utils/globals.dart';
 import 'package:todo/presentation/widgets/task_widget.dart';
 import '../../../data/models/task_model.dart';
 import '../../resources/color_manager.dart';
@@ -25,11 +25,13 @@ class LoadedBody extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            margin: const EdgeInsets.fromLTRB(55, 0, 0, 0),
+            margin: const EdgeInsets.symmetric(
+                vertical: AppSize.medium, horizontal: AppSize.small),
             width: double.infinity,
             height: AppSize.large,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 SizedBox(
                   width: 25,
@@ -40,15 +42,12 @@ class LoadedBody extends StatelessWidget {
                     value: checkDoneTask(tasks) / valueOfTheIndicator(tasks),
                   ),
                 ),
-                const SizedBox(
-                  width: 25,
-                ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(StringsManager.mainTitle,
-                        style: headline2(color: Colors.black)),
+                        style: headline3(color: Colors.black)),
                     const SizedBox(
                       height: 3,
                     ),
@@ -56,9 +55,6 @@ class LoadedBody extends StatelessWidget {
                         "${checkDoneTask(tasks)} of ${tasks.length} task${tasks.length > 1 ? 's' : ''} completed !",
                         style: subHeading(color: Colors.black)),
                   ],
-                ),
-                const SizedBox(
-                  width: AppSize.medium,
                 ),
                 SizedBox(
                   width: AppSize.large,

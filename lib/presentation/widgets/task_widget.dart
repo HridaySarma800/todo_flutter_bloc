@@ -6,7 +6,7 @@ import 'package:todo/logic/home_cubit/home_cubit.dart';
 import 'package:todo/presentation/resources/color_manager.dart';
 import 'package:todo/presentation/resources/styles_manager.dart';
 import 'package:todo/presentation/resources/values_manager.dart';
-import 'package:todo/presentation/utils/functions.dart';
+import 'package:todo/presentation/utils/globals.dart';
 import '../resources/routes_manager.dart';
 
 class TaskWidget extends StatefulWidget {
@@ -18,6 +18,7 @@ class TaskWidget extends StatefulWidget {
   // ignore: library_private_types_in_public_api
   _TaskWidgetState createState() => _TaskWidgetState();
 }
+
 
 class _TaskWidgetState extends State<TaskWidget> {
   TextEditingController taskControllerForTitle = TextEditingController();
@@ -78,10 +79,11 @@ class _TaskWidgetState extends State<TaskWidget> {
                         : Colors.white,
                     shape: BoxShape.circle,
                     border: Border.all(color: Colors.black, width: .8)),
-                child:  Padding(
+                child: Padding(
                   padding: const EdgeInsets.all(AppSize.xxs),
-                  child: isPending(
-                          widget.task.createdAtDate, widget.task.createdAtTime) && !widget.task.isCompleted
+                  child: isPending(widget.task.createdAtDate,
+                              widget.task.createdAtTime) &&
+                          !widget.task.isCompleted
                       ? const Icon(
                           Icons.pending_actions_sharp,
                           color: Colors.black87,
@@ -102,13 +104,14 @@ class _TaskWidgetState extends State<TaskWidget> {
               child: Text(
                 taskControllerForTitle.text,
                 style: subHeading(
-                  color: widget.task.isCompleted
-                      ? ColorManager.primary
-                      : Colors.black,
+                  color: widget.task.isCompleted ? Colors.white : Colors.black,
                 )?.copyWith(
-                    decoration: widget.task.isCompleted
-                        ? TextDecoration.lineThrough
-                        : null),
+                  decoration: widget.task.isCompleted
+                      ? TextDecoration.lineThrough
+                      : null,
+                  decorationThickness: 0.9,
+
+                ),
               ),
             ),
 
@@ -119,9 +122,8 @@ class _TaskWidgetState extends State<TaskWidget> {
                 Text(
                   taskControllerForSubtitle.text,
                   style: body(
-                    color: widget.task.isCompleted
-                        ? ColorManager.primary
-                        : Colors.black54,
+                    color:
+                        widget.task.isCompleted ? Colors.white : Colors.black54,
                   )?.copyWith(
                       decoration: widget.task.isCompleted
                           ? TextDecoration.lineThrough
@@ -162,5 +164,4 @@ class _TaskWidgetState extends State<TaskWidget> {
       ),
     );
   }
-
 }

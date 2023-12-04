@@ -5,7 +5,7 @@ import 'package:todo/presentation/resources/color_manager.dart';
 import 'package:todo/presentation/resources/strings_manager.dart';
 import 'package:todo/presentation/resources/styles_manager.dart';
 import 'package:todo/presentation/resources/values_manager.dart';
-import 'package:todo/presentation/utils/functions.dart';
+import 'package:todo/presentation/utils/globals.dart';
 
 class TaskAppbar extends StatelessWidget implements PreferredSizeWidget {
   const TaskAppbar({super.key, required this.taskModel});
